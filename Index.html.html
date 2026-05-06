@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>AppZooRA · Realidad Aumentada Educativa</title>
+    <link rel="icon" type="image/jpeg" href="Images/Logo.jpg">
+    <style>
+        /* ---------- RESET & VARIABLES (Premium Nature Safari) ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-brown: #3F1E1A;      /* alta jerarquía, headers */
+            --earth-brown: #8C6042;       /* botones principales, acentos */
+            --cream-bg: #F4F1EA;          /* fondo general limpio y cálido */
+            --gold: #F7D794;              /* hover, detalles luminosos */
+            --dark-soft: #2a1714;
+            --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 20px 25px -12px rgba(0, 0, 0, 0.08);
+            --border-radius-card: 28px;
+            --border-radius-btn: 60px;
+            --transition-smooth: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        body {
+            background-color: var(--cream-bg);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: var(--dark-brown);
+            line-height: 1.4;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: clamp(2.4rem, 8vw, 4.2rem);
+            color: var(--dark-brown);
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ----- HERO SECTION ----- */
+        .hero {
+            padding: 3rem 0 2rem 0;
+            text-align: center;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.8rem;
+        }
+
+        .logo-img {
+            width: 110px;
+            height: 110px;
+            object-fit: contain;
+            filter: drop-shadow(var(--shadow-sm));
+            transition: transform 0.2s ease;
+            background: white;
+            border-radius: 30px; /* Estilo similar al logo */
+            padding: 5px;
+        }
+
+        .hero-sub {
+            font-size: 1.3rem;
+            font-weight: 450;
+            color: var(--earth-brown);
+            max-width: 600px;
+            margin: 0 auto;
+            border-bottom: 2px solid var(--gold);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        /* ----- SECCIÓN CTA BOTONES (Descargas Locales) ----- */
+        .cta-section {
+            margin: 3rem 0 2rem;
+        }
+
+        .buttons-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2.2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: var(--border-radius-btn);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            border: 1px solid transparent;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary {
+            background: var(--earth-brown);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-brown);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -12px rgba(63, 30, 26, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--dark-brown);
+            border: 1.5px solid var(--earth-brown);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        /* ------ GRID: especificaciones técnicas ------ */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin: 2.5rem 0 4rem;
+        }
+
+        .spec-card {
+            background: white;
+            border-radius: var(--border-radius-card);
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(140, 96, 66, 0.1);
+        }
+
+        .spec-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ------ GUIA PASO A PASO ------ */
+        .guide-section {
+            margin: 4rem 0 3rem;
+            background: rgba(247, 215, 148, 0.1);
+            border-radius: 48px;
+            padding: 2.5rem 2rem;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 780px;
+            margin: 2rem auto 0;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            background: white;
+            border-radius: 42px;
+            padding: 1rem 1.8rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .step-number {
+            background: var(--earth-brown);
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .footer {
+            margin-top: 4rem;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(140, 96, 66, 0.1);
+            color: var(--earth-brown);
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="hero">
+                <div class="logo-wrapper">
+                    <img src="Images/Logo.jpg" alt="AppZooRA Logo" class="logo-img">
+                </div>
+                <h1 class="hero-title">AppZooRA</h1>
+                <div class="hero-sub">Tu zoológico personal en Realidad Aumentada aplicado a la educación</div>
+            </div>
+
+            <div class="cta-section">
+                <div class="buttons-group">
+                    <a href="Downloads/app 0.4.apk" download class="btn btn-primary">
+                        <span>📱</span> Descargar App (APK)
+                    </a>
+                    <a href="Downloads/TargetsAppZooRa.pdf" download class="btn btn-secondary">
+                        <span>🖨️</span> Imprimir Marcadores (PDF)
+                    </a>
+                </div>
+            </div>
+
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <div class="spec-icon">🤖</div>
+                    <h3>Android 10.0+</h3>
+                    <p>Optimizado para ARCore</p>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">💾</div>
+                    <h3>238 MB</h3>
+                    <p>Espacio en disco requerido</p>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon">📸</div>
+                    <h3>Cámara</h3>
+                    <p>Necesaria para Realidad Aumentada</p>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h2 style="text-align: center;">Guía Rápida</h2>
+                <div class="steps">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <p>Descarga el archivo APK arriba.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <p>Habilita la instalación de fuentes externas en tu móvil.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <p>Instala la aplicación y concede permiso de cámara.</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <p>Imprime el PDF y escanea los marcadores para ver la magia.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>© 2026 AppZooRA - Macas, Morona Santiago.</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
